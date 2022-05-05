@@ -29,6 +29,8 @@ public class MentoriaApplication {
 			repository.save(Product.builder().name("Celular Samsung").price(100.2).build());
 			repository.save(Product.builder().name("Tv LG 55 led").price(5000).build());
 			repository.save(Product.builder().name("Console PS5").price(4000.6).build());
+			repository.save(Product.builder().name("Console PS4").price(2000.6).build());
+			repository.save(Product.builder().name("Console PS3").price(1000.6).build());
 			repository.save(Product.builder().name("Notebook dell").price(3000.2).build());
 
 
@@ -88,6 +90,20 @@ public class MentoriaApplication {
 			log.info("----produtos com preco menor por parametro");
 			List<Product> priceLessThan = repository.findPriceLessThan(5000);
 			priceLessThan.forEach(p -> log.info(p.toString()));
+			log.info("-----------findByNameAllIgnoreCase");
+		    repository.findByNameAllIgnoreCase("console ps5").forEach(p -> log.info(p.toString()));
+			log.info("-----------findByNameOrderByPrice");
+			repository.findByNameOrderByPrice("Console ps5").forEach(p -> log.info(p.toString()));
+			log.info("-----------findByNameIgnoreCase");
+			repository.findByNameIgnoreCase("tv lg 55 led").forEach(p -> log.info(p.toString()));
+			log.info("-----------findDistinctProductByNameOrId");
+			repository.findDistinctProductByNameOrId("console ps",3L).forEach(p -> log.info(p.toString()));
+			log.info("-----------findByNameAndPrice");
+			repository.findByNameOrPrice("monitor", 5000).forEach(p -> log.info(p.toString()));
+			log.info("-----------findByNameAndPrice");
+			repository.findByNameAndPrice("console ps5", 4000.6).forEach(p -> log.info(p.toString()));
+			log.info("-----------findByNameOrderByPriceDesc");
+			repository.findByNameOrderByPriceDesc("console ps5").forEach(p -> log.info(p.toString()));
 		};
 	}
 }

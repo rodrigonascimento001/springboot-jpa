@@ -23,4 +23,18 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
         @Query(value = "from products p where p.price < :price")
         List<Product> findPriceLessThan(double price);
 
- }
+        List<Product> findByNameAndPrice(String name, double price);
+
+        // Enables the distinct flag for the query
+        List<Product> findDistinctProductByNameOrId(String name, long id);
+
+        // Enabling ignoring case for an individual property
+        List<Product> findByNameIgnoreCase(String name);
+        // Enabling ignoring case for all suitable properties
+        List<Product> findByNameAllIgnoreCase(String name);
+
+        // Enabling static ORDER BY for a query
+        List<Product> findByNameOrderByPrice(String name);
+        List<Product> findByNameOrderByPriceDesc(String name);
+        List<Product> findByNameOrPrice(String name, double price);
+}
