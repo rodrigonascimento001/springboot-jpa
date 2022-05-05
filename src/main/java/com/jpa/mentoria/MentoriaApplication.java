@@ -29,6 +29,7 @@ public class MentoriaApplication {
 			repository.save(Product.builder().name("Celular Samsung").price(100.2).build());
 			repository.save(Product.builder().name("Tv LG 55 led").price(5000).build());
 			repository.save(Product.builder().name("Console PS5").price(4000.6).build());
+			repository.save(Product.builder().name("Notebook dell").price(3000.2).build());
 
 
 			// fetch all products
@@ -71,6 +72,22 @@ public class MentoriaApplication {
 			log.info(Integer.toString(byPrice.size()));
 			//log.info(byPrice.size().toString());
 
+
+
+			/// hql example
+			log.info("----exemplo com HQL");
+			log.info("----produtos com preco maior que 500");
+			List<Product> priceBiggerThan500 = repository.findPriceBiggerThan500();
+
+			priceBiggerThan500.forEach(p -> log.info(p.toString()));
+
+			log.info("----produtos com preco maior por parametro");
+			List<Product> priceBiggerThanParam = repository.findPriceBiggerThan(4500);
+			priceBiggerThanParam.forEach(p -> log.info(p.toString()));
+
+			log.info("----produtos com preco menor por parametro");
+			List<Product> priceLessThan = repository.findPriceLessThan(5000);
+			priceLessThan.forEach(p -> log.info(p.toString()));
 		};
 	}
 }
